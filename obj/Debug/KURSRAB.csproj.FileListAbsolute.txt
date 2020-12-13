@@ -1,0 +1,10 @@
+D:\Программирование\2КУРС\KURSRAB\bin\Debug\KURSRAB.exe.config
+D:\Программирование\2КУРС\KURSRAB\bin\Debug\KURSRAB.exe
+D:\Программирование\2КУРС\KURSRAB\bin\Debug\KURSRAB.pdb
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.csprojAssemblyReference.cache
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.Form1.resources
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.Properties.Resources.resources
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.csproj.GenerateResource.cache
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.csproj.CoreCompileInputs.cache
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.exe
+D:\Программирование\2КУРС\KURSRAB\obj\Debug\KURSRAB.pdb
