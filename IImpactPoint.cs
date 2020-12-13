@@ -27,7 +27,7 @@ namespace KURSRAB
                 );
         }
     }
-    public class GravityPoint : IImpactPoint
+    public class RadarPoint : IImpactPoint
     {
         public int pointRadius = 120;
         int littleCount = 0;

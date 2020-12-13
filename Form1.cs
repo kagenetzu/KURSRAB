@@ -14,7 +14,7 @@ namespace KURSRAB
     {
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter; // добавим поле для эмиттера
-        GravityPoint point1 = new GravityPoint(); // добавил поле под первую точку
+        RadarPoint point1 = new RadarPoint(); // добавил поле под первую точку
 
         Color clFrom = Color.Gold;
         Color clTo = Color.FromArgb(0, Color.Red);
@@ -46,7 +46,7 @@ namespace KURSRAB
             emitters.Add(this.emitter); // все равно добавляю в список emitters, чтобы он рендерился и обновлялся
 
             // привязываем гравитоны к полям
-            point1 = new GravityPoint
+            point1 = new RadarPoint
             {
                 X = picDisplay.Width / 2 + 100,
                 Y = picDisplay.Height / 2,
@@ -103,13 +103,13 @@ namespace KURSRAB
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             emitter.Direction = trackBar1.Value;
-            label6.Text = $"{trackBar1.Value}";
+            label6.Text = $"{emitter.Direction}";
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             emitter.Spreading = trackBar2.Value;
-            label3.Text = $"{trackBar2.Value}";
+            label3.Text = $"{emitter.Spreading}";
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace KURSRAB
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
             emitter.ParticlesPerTick = trackBar5.Value;
-            label8.Text = $"{trackBar5.Value}";
+            label8.Text = $"{emitter.ParticlesPerTick}";
         }
 
         private void trackBar4_Scroll(object sender, EventArgs e)
