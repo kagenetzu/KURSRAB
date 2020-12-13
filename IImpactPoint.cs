@@ -32,31 +32,43 @@ namespace KURSRAB
         int littleCount = 0;
         int averangeCount = 0;
         int bigCount = 0;
-        public Color from = Color.Green;
-        public Color to = Color.FromArgb(0, Color.GreenYellow);
-
-        public Color fromBack = Color.Gold;
-        public Color toBack = Color.FromArgb(0, Color.Red);
-
+        public Color colorRadar = Color.Red;
+        List<Particle> radarParticle = new List<Particle>();
+       
+       
         public override void ImpactParticle(Particle particle)
         {
+            
             float gX = X - particle.X;
             float gY = Y - particle.Y;
-            var color = particle as ParticleColorful;
-
             double r = Math.Sqrt(gX * gX + gY * gY); // считаем расстояние от центра точки до центра частицы
-            
             if (r + particle.Radius < pointRadius / 2) // если частица оказалось внутри окружности
             {
-                color.FromColor = from;
-                color.ToColor = to;
-                if (particle.Radius < 5)
+                radarParticle.Add(particle);
+            }
+            
+        }
+        public override void Render(Graphics g)
+        {
+           g.DrawEllipse(
+                   new Pen(Color.White,3),
+                   X - pointRadius / 2,
+                   Y - pointRadius / 2,
+                   pointRadius,
+                   pointRadius
+               );
+            SolidBrush b = new SolidBrush(colorRadar);
+            foreach (var par in radarParticle)
+            {
+                g.FillEllipse(b, par.X - par.Radius, par.Y - par.Radius, par.Radius * 2, par.Radius * 2);
+
+                if (par.Radius < 5)
                 {
                     littleCount++;
                 }
                 else
                 {
-                    if(particle.Radius > 8)
+                    if (par.Radius > 8)
                     {
                         bigCount++;
                     }
@@ -66,31 +78,13 @@ namespace KURSRAB
                     }
                 }
             }
-            else
-            {
-                color.FromColor = fromBack;
-                color.ToColor = toBack;
+            radarParticle.Clear();
 
-            }
-        }
-        public override void Render(Graphics g)
-        {
-            
-           g.DrawEllipse(
-                   new Pen(Color.White,3),
-                   X - pointRadius / 2,
-                   Y - pointRadius / 2,
-                   pointRadius,
-                   pointRadius
-               );
-           
-            
 
             var stringFormat = new StringFormat(); // создаем экземпляр класса
             stringFormat.Alignment = StringAlignment.Center; // выравнивание по горизонтали
             stringFormat.LineAlignment = StringAlignment.Center; // выравнивание по вертикали
 
-            
             g.DrawString(
                 $"Маленькие {littleCount}\n Средние {averangeCount}\n Большие {bigCount}",
                 new Font("Verdana", 10),
@@ -99,6 +93,7 @@ namespace KURSRAB
                 Y,
                 stringFormat // передаем инфу о выравнивании
             );
+            
             littleCount = 0;
             averangeCount = 0;
             bigCount = 0;
@@ -107,7 +102,6 @@ namespace KURSRAB
     public class AntiGravityPoint : IImpactPoint
     {
         public int Power = 100; // сила отторжения
-
         // а сюда по сути скопировали с минимальными правками то что было в UpdateState
         public override void ImpactParticle(Particle particle)
         {
