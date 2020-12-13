@@ -28,13 +28,16 @@ namespace KURSRAB
     }
     public class GravityPoint : IImpactPoint
     {
-        public int Power = 100; // сила притяжения
         public int pointRadius = 120;
         int littleCount = 0;
         int averangeCount = 0;
         int bigCount = 0;
         public Color from = Color.Green;
         public Color to = Color.FromArgb(0, Color.GreenYellow);
+
+        public Color fromBack = Color.Gold;
+        public Color toBack = Color.FromArgb(0, Color.Red);
+
         public override void ImpactParticle(Particle particle)
         {
             float gX = X - particle.X;
@@ -65,8 +68,8 @@ namespace KURSRAB
             }
             else
             {
-                color.FromColor = Color.Gold;
-                color.ToColor = Color.FromArgb(0, Color.Red);
+                color.FromColor = fromBack;
+                color.ToColor = toBack;
 
             }
         }

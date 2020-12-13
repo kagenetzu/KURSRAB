@@ -16,10 +16,14 @@ namespace KURSRAB
         Emitter emitter; // добавим поле для эмиттера
 
         GravityPoint point1 = new GravityPoint(); // добавил поле под первую точку
-       
 
+
+
+
+        Color cl = Color.Blue;
         public Form1()
         {
+           
             InitializeComponent();
             picDisplay.MouseWheel += picDisplay_MouseWheel;
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
@@ -44,6 +48,7 @@ namespace KURSRAB
             {
                 X = picDisplay.Width / 2 + 100,
                 Y = picDisplay.Height / 2,
+                
                 
             };
             
@@ -93,11 +98,6 @@ namespace KURSRAB
             }
         }
 
-
-
-
-
-
         private void picDisplay_Click(object sender, EventArgs e)
         {
 
@@ -143,14 +143,44 @@ namespace KURSRAB
 
         private void button3_Click(object sender, EventArgs e)
         {
-            point1.from = Color.DarkRed;
-            point1.to = Color.FromArgb(0, Color.Red);
+            point1.from = Color.Red;
+            point1.to = Color.FromArgb(0, Color.DarkRed);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             point1.from = Color.DeepPink;
             point1.to = Color.FromArgb(0, Color.DeepPink);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    emitter.ColorFrom = Color.Purple;
+                    emitter.ColorTo = Color.FromArgb(0, Color.MediumPurple);
+                    point1.fromBack = Color.Purple;
+                    point1.toBack = Color.FromArgb(0, Color.MediumPurple);
+                    break;
+                case 1:
+                    emitter.ColorFrom = Color.Orange;
+                    emitter.ColorTo = Color.FromArgb(0, Color.Yellow);
+                    point1.fromBack = Color.Orange;
+                    point1.toBack = Color.FromArgb(0, Color.Yellow);
+                    break;
+                case 2:
+                    emitter.ColorFrom = Color.Silver;
+                    emitter.ColorTo = Color.FromArgb(0, Color.White);
+                    point1.fromBack = Color.Silver;
+                    point1.toBack = Color.FromArgb(0, Color.White);
+                    break;
+            }
         }
     }
 }
