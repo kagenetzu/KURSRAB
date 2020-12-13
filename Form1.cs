@@ -44,6 +44,7 @@ namespace KURSRAB
             {
                 X = picDisplay.Width / 2 + 100,
                 Y = picDisplay.Height / 2,
+                
             };
             
             // привязываем поля к эмиттеру
@@ -128,6 +129,28 @@ namespace KURSRAB
             emitter.SpeedMin = trackBar4.Value - 10;
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            point1.from = Color.Blue;
+            point1.to = Color.FromArgb(0, Color.BlueViolet);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            point1.from = Color.Green;
+            point1.to = Color.FromArgb(0, Color.GreenYellow);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            point1.from = Color.DarkRed;
+            point1.to = Color.FromArgb(0, Color.Red);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            point1.from = Color.DeepPink;
+            point1.to = Color.FromArgb(0, Color.DeepPink);
+        }
     }
 }

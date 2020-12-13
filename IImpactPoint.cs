@@ -12,8 +12,6 @@ namespace KURSRAB
         public float X; // ну точка же, вот и две координаты
         public float Y;
 
-        // абстрактный метод с помощью которого будем изменять состояние частиц
-        // например притягивать
         public abstract void ImpactParticle(Particle particle);
 
         // базовый класс для отрисовки точечки
@@ -35,6 +33,8 @@ namespace KURSRAB
         int littleCount = 0;
         int averangeCount = 0;
         int bigCount = 0;
+        public Color from = Color.Green;
+        public Color to = Color.FromArgb(0, Color.GreenYellow);
         public override void ImpactParticle(Particle particle)
         {
             float gX = X - particle.X;
@@ -45,8 +45,8 @@ namespace KURSRAB
             
             if (r + particle.Radius < pointRadius / 2) // если частица оказалось внутри окружности
             {
-                color.FromColor = Color.Green;
-                color.ToColor = Color.FromArgb(0, Color.GreenYellow);
+                color.FromColor = from;
+                color.ToColor = to;
                 if (particle.Radius < 5)
                 {
                     littleCount++;
@@ -74,7 +74,7 @@ namespace KURSRAB
         {
             
            g.DrawEllipse(
-                   new Pen(Color.Green),
+                   new Pen(Color.White,3),
                    X - pointRadius / 2,
                    Y - pointRadius / 2,
                    pointRadius,
