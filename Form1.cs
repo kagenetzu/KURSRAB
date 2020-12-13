@@ -143,14 +143,14 @@ namespace KURSRAB
         {
             if (colorDialog2.ShowDialog() == DialogResult.Cancel)
                 return;
-            clFrom = Color.Red;
+            Particle.colorF = colorDialog2.Color ;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (colorDialog3.ShowDialog() == DialogResult.Cancel)
                 return;
-            //clTo = colorDialog3.Color;
+            Particle.colorT = Color.FromArgb(0,colorDialog3.Color);
         }
     }
 }

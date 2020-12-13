@@ -9,6 +9,7 @@ namespace KURSRAB
 {
     public abstract class IImpactPoint
     {
+        
         public float X; // ну точка же, вот и две координаты
         public float Y;
 
