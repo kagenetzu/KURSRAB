@@ -9,8 +9,6 @@ namespace KURSRAB
 {
     public class Particle
     {
-        public static Color colorF = Color.Gold;
-        public static Color colorT = Color.FromArgb(0, Color.Red);
         public int Radius; // радиус частицы
         public float X; // X координата положения частицы в пространстве
         public float Y; // Y координата положения частицы в пространстве
@@ -18,7 +16,6 @@ namespace KURSRAB
         public float SpeedX; // скорость перемещения по оси X
         public float SpeedY; // скорость перемещения по оси Y
         public float Life; // запас здоровья частицы
-
         // добавили генератор случайных чисел
         public static Random rand = new Random();
 
@@ -79,7 +76,7 @@ namespace KURSRAB
             float k = Math.Min(1f, Life / 100);
 
             // так как k уменьшается от 1 до 0, то порядок цветов обратный
-            var color = MixColor(colorT, colorF, k);
+            var color = MixColor(ToColor, FromColor, k);
             var b = new SolidBrush(color);
 
             g.FillEllipse(b, X - Radius, Y - Radius, Radius * 2, Radius * 2);

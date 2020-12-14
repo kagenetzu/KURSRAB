@@ -30,8 +30,8 @@ namespace KURSRAB
         public int LifeMax = 100; // максимальное время жизни частицы
         public int ParticlesPerTick = 1;
 
-        public Color ColorFrom = Color.White; // начальный цвет частицы
-        public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
+        public Color ColorFrom = Color.Gold; // начальный цвет частицы
+        public Color ColorTo = Color.FromArgb(0, Color.Red); // конечный цвет частиц
 
 
 
@@ -81,6 +81,11 @@ namespace KURSRAB
 
         public virtual void ResetParticle(Particle particle)
         {
+
+            var partColor = particle as ParticleColorful;
+            partColor.FromColor = ColorFrom;
+            partColor.ToColor = ColorTo;
+
             particle.Life = Particle.rand.Next(LifeMin, LifeMax);
 
             particle.X = X;
@@ -122,21 +127,5 @@ namespace KURSRAB
         }
     }
 
-    public class TopEmitter : Emitter
-    {
-        public int Width; // длина экрана
-
-        public override void ResetParticle(Particle particle)
-        {
-            base.ResetParticle(particle); // вызываем базовый сброс частицы, там жизнь переопределяется и все такое
-
-            // а теперь тут уже подкручиваем параметры движения
-            particle.X = Particle.rand.Next(Width); // позиция X -- произвольная точка от 0 до Width
-            particle.Y = 0;  // ноль -- это верх экрана 
-
-            particle.SpeedY = 1; // падаем вниз по умолчанию
-            particle.SpeedX = Particle.rand.Next(-2, 2); // разброс влево и вправа у частиц 
-        }
-    }
 
 }

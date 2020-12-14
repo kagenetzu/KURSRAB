@@ -14,21 +14,17 @@ namespace KURSRAB
     {
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter; // добавим поле для эмиттера
-        RadarPoint point1 = new RadarPoint(); // добавил поле под первую точку
+        RadarPoint point1 = new RadarPoint(); // точка радар
 
-        Color clFrom = Color.Gold;
-        Color clTo = Color.FromArgb(0, Color.Red);
         public Form1()
         {
-           
             InitializeComponent();
             picDisplay.MouseWheel += picDisplay_MouseWheel;
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
+            // менюшки для выбора цвета у радара и частиц
             colorDialog1.FullOpen = true;
             colorDialog2.FullOpen = true;
             colorDialog3.FullOpen = true;
-
-           
 
             this.emitter = new Emitter // создаю эмиттер и привязываю его к полю emitter
             {
@@ -36,16 +32,15 @@ namespace KURSRAB
                 Spreading = 100,
                 SpeedMin = 10,
                 SpeedMax = 20,
-                ColorFrom = clFrom,
-                ColorTo =clTo,
+                ColorFrom = Color.Gold,
+                ColorTo =Color.FromArgb(0, Color.Red),
                 ParticlesPerTick = 20,
                 X = picDisplay.Width / 2,
                 Y = picDisplay.Height / 2,
             };
 
             emitters.Add(this.emitter); // все равно добавляю в список emitters, чтобы он рендерился и обновлялся
-
-            // привязываем гравитоны к полям
+            
             point1 = new RadarPoint
             {
                 X = picDisplay.Width / 2 + 100,
@@ -79,17 +74,19 @@ namespace KURSRAB
                 emitter.MousePositionX = e.X;
                 emitter.MousePositionY = e.Y;
             }
-            // а тут передаем положение мыши, в положение гравитона
+            // положение мышки в положение радара
             point1.X = e.X;
             point1.Y = e.Y;
         }
         private void picDisplay_MouseWheel(object sender, MouseEventArgs e)
         {
+            // если колески мышки вертится вниз и радиус точки больше нуля, мы уменьшаем радиус
             if(e.Delta < 0 && point1.pointRadius > 0)
             {
                 point1.pointRadius -=5;
             }
-            if(e.Delta > 0 && point1.pointRadius < 500)
+            // если колески мышки вертится вверх и радиус точки меньше 500, мы увеличиваем радиус
+            if (e.Delta > 0 && point1.pointRadius < 500)
             {
                 point1.pointRadius +=5;
             }
@@ -97,15 +94,14 @@ namespace KURSRAB
 
         private void picDisplay_Click(object sender, EventArgs e)
         {
-
         }
-
+        // меняем направление частиц
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             emitter.Direction = trackBar1.Value;
             label6.Text = $"{emitter.Direction}";
         }
-
+        // меняем разброс частиц
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             emitter.Spreading = trackBar2.Value;
@@ -114,43 +110,41 @@ namespace KURSRAB
 
         private void label5_Click(object sender, EventArgs e)
         {
-
         }
-
+        // меня кол-во частиц за тик
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
             emitter.ParticlesPerTick = trackBar5.Value;
             label8.Text = $"{emitter.ParticlesPerTick}";
         }
-
+        // меняем скорость частиц
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
             emitter.SpeedMax = trackBar4.Value;
             emitter.SpeedMin = trackBar4.Value - 10;
             label7.Text = $"{trackBar4.Value}";
         }
-
         
-
+        //меняем цвет радара
         private void button1_Click_1(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             point1.colorRadar = colorDialog1.Color;
         }
-
+        // меняем цвет частиц
         private void button2_Click(object sender, EventArgs e)
         {
             if (colorDialog2.ShowDialog() == DialogResult.Cancel)
                 return;
-            Particle.colorF = colorDialog2.Color ;
+            emitter.ColorFrom = colorDialog2.Color ;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (colorDialog3.ShowDialog() == DialogResult.Cancel)
                 return;
-            Particle.colorT = Color.FromArgb(0,colorDialog3.Color);
+            emitter.ColorTo = Color.FromArgb(0,colorDialog3.Color);
         }
     }
 }
